@@ -1,0 +1,2012 @@
+/* FocusTube - YouTube Responsive Content Styles (Desktop, Tablet, Mobile) */
+
+/* ========================================================
+   Home Page Immediate Clean Removal of Distractions
+   Hides Left Sidebar / Guide, Chips, Shorts, Algorithmic Feeds
+   Leaves ONLY the Topbar / Search Bar
+   ======================================================== */
+
+body.focustube-active.focustube-home-active ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents,
+body.focustube-active.focustube-home-active ytd-browse[page-subtype="home"] #chips-wrapper,
+body.focustube-active.focustube-home-active ytd-browse[page-subtype="home"] iron-selector#chips,
+body.focustube-active.focustube-home-active ytd-rich-shelf-renderer[is-shorts],
+body.focustube-active.focustube-home-active ytd-reel-shelf-renderer,
+body.focustube-active.focustube-home-active ytd-statement-banner-renderer,
+body.focustube-active.focustube-home-active ytd-banner-promo-renderer,
+body.focustube-active.focustube-home-active ytm-chip-cloud-renderer,
+body.focustube-active.focustube-home-active ytm-rich-grid-renderer > #contents,
+body.focustube-active.focustube-home-active ytm-reel-shelf-renderer {
+  display: none !important;
+}
+
+/* Hide Left-Side Menubar & Navigation Drawers on Home Page */
+body.focustube-active.focustube-home-active #guide,
+body.focustube-active.focustube-home-active tp-yt-app-drawer#guide,
+body.focustube-active.focustube-home-active ytd-mini-guide-renderer,
+body.focustube-active.focustube-home-active ytm-pivot-bar-renderer {
+  display: none !important;
+}
+
+/* Re-adjust Home container margins when left menubar is hidden */
+body.focustube-active.focustube-home-active ytd-page-manager {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+body.focustube-active.focustube-home-active ytd-app[guide-persistent-and-visible] ytd-page-manager {
+  margin-left: 0 !important;
+}
+
+body.focustube-active.focustube-home-active ytd-browse[page-subtype="home"] {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* ========================================================
+   Video Ending / Endscreen Protection
+   Hides default algorithmic recommendations at video end
+   ======================================================== */
+
+body.focustube-active .html5-endscreen,
+body.focustube-active .ytp-endscreen-content,
+body.focustube-active .ytp-ce-element,
+body.focustube-active .ytp-autonav-endscreen-countdown-overlay {
+  display: none !important;
+}
+
+/* Focused Endscreen Overlay */
+#focustube-player-endscreen {
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 15, 29, 0.92);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: focustube-fade-in 0.25s ease-out;
+  color: #ffffff;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+}
+
+.focustube-endscreen-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 16px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.focustube-endscreen-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #1e293b;
+}
+
+.focustube-endscreen-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.focustube-endscreen-channel {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.focustube-endscreen-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.focustube-endscreen-actions button,
+.focustube-endscreen-actions a {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Watch page recommendation hiding */
+body.focustube-active.focustube-hide-sidebar #related #items,
+body.focustube-active.focustube-hide-sidebar ytd-watch-next-secondary-results-renderer #items:not(#focustube-workspace-container),
+body.focustube-active.focustube-hide-sidebar ytd-watch-next-secondary-results-renderer > #contents {
+  display: none !important;
+}
+
+/* Mobile watch page recommendation hiding */
+body.focustube-active.focustube-hide-sidebar ytm-item-section-renderer.watch-below-the-player:not(#focustube-mobile-container),
+body.focustube-active.focustube-hide-sidebar .related-items-container {
+  display: none !important;
+}
+
+/* ========================================================
+   Watch Page Split-View Layout (Video + Note-Taking Workspace)
+   Visible by default, fully responsive, zero overflow
+   ======================================================== */
+
+/* Prevent horizontal overflow on Watch Page */
+body.focustube-active.focustube-watch-active {
+  overflow-x: hidden !important;
+}
+
+/* Enforce 2-column Split-View on Watch Page when FocusTube is active */
+body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #columns {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0 20px !important;
+  gap: 20px !important;
+  margin: 0 auto !important;
+}
+
+/* Video Player Primary Content Area */
+body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #primary {
+  flex: 1 1 0% !important;
+  min-width: 440px !important;
+  max-width: calc(100% - 410px) !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  transition: max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1), flex 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Note-Taking Sidebar Area alongside Video */
+body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #secondary {
+  flex: 0 0 390px !important;
+  width: 390px !important;
+  min-width: 350px !important;
+  max-width: 430px !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  transition: opacity 0.2s ease, width 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #secondary-inner {
+  width: 100% !important;
+}
+
+/* Responsive Split-View Adjustments */
+@media (max-width: 1280px) {
+  body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #columns {
+    padding: 0 14px !important;
+    gap: 16px !important;
+  }
+  body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #secondary {
+    flex: 0 0 360px !important;
+    width: 360px !important;
+    min-width: 320px !important;
+  }
+  body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #primary {
+    max-width: calc(100% - 376px) !important;
+    min-width: 380px !important;
+  }
+}
+
+@media (max-width: 980px) {
+  body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #columns {
+    padding: 0 10px !important;
+    gap: 12px !important;
+  }
+  body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #secondary {
+    flex: 0 0 320px !important;
+    width: 320px !important;
+    min-width: 290px !important;
+  }
+  body.focustube-active:not(.focustube-sidebar-collapsed) ytd-watch-flexy:not([fullscreen]) #primary {
+    max-width: calc(100% - 332px) !important;
+    min-width: 300px !important;
+  }
+}
+
+/* ========================================================
+   Collapsed Sidebar / Full-Width Video Mode
+   ======================================================== */
+
+body.focustube-active.focustube-sidebar-collapsed:not(.focustube-notes-pinned) ytd-watch-flexy #secondary {
+  display: none !important;
+}
+
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #columns {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 24px !important;
+  justify-content: center !important;
+}
+
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #primary {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 100% !important;
+  transition: max-width 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #player-container-outer,
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #player-container-inner,
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #player-container,
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #ytd-player,
+body.focustube-active.focustube-sidebar-collapsed ytd-watch-flexy #player {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ========================================================
+   Pinned Notes Mode in Full-Width & Theater Video
+   Accessible floating overlay over video
+   ======================================================== */
+
+#focustube-sidebar-workspace.focustube-pinned {
+  position: fixed !important;
+  top: 68px !important;
+  right: 20px !important;
+  width: 390px !important;
+  max-width: min(390px, calc(100vw - 40px)) !important;
+  max-height: calc(100vh - 130px) !important;
+  z-index: 2050 !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(59, 130, 246, 0.55) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7), 0 0 20px rgba(59, 130, 246, 0.25) !important;
+  overflow-y: auto !important;
+  margin-bottom: 0 !important;
+  animation: focustube-pin-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes focustube-pin-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* In full-width video mode with pinned notes, let primary expand to 100% */
+body.focustube-active.focustube-sidebar-collapsed.focustube-notes-pinned ytd-watch-flexy #secondary {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+body.focustube-active.focustube-sidebar-collapsed.focustube-notes-pinned ytd-watch-flexy #primary {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 100% !important;
+}
+
+/* ========================================================
+   Floating Expand Button ("Show notes" / "Hide notes")
+   Directly placed over video in full view & fullscreen mode
+   ======================================================== */
+
+#focustube-expand-toggle-btn {
+  position: fixed;
+  top: 72px;
+  right: 24px;
+  z-index: 2100;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(239, 68, 68, 0.55);
+  color: #ffffff;
+  border-radius: 22px;
+  padding: 8px 16px;
+  font-family: 'Roboto', 'YouTube Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(239, 68, 68, 0.3);
+  user-select: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: focustube-fade-in 0.2s ease-out;
+  pointer-events: auto !important;
+}
+
+#focustube-expand-toggle-btn:not(.visible) {
+  display: none !important;
+}
+
+#focustube-expand-toggle-btn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.4);
+}
+
+#focustube-expand-toggle-btn.visible {
+  display: inline-flex !important;
+}
+
+#focustube-expand-toggle-btn.active {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(59, 130, 246, 0.65);
+  color: #93c5fd;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(59, 130, 246, 0.3);
+}
+
+#focustube-expand-toggle-btn.active:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+/* Position inside YouTube Player element & Native Fullscreen */
+#movie_player #focustube-expand-toggle-btn,
+.html5-video-player #focustube-expand-toggle-btn,
+.html5-video-player.ytp-fullscreen #focustube-expand-toggle-btn,
+:fullscreen #focustube-expand-toggle-btn {
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  z-index: 2100 !important;
+}
+
+.html5-video-player.ytp-autohide:not(:hover) #focustube-expand-toggle-btn:not(:hover):not(.active) {
+  opacity: 0.5;
+}
+
+#movie_player #focustube-sidebar-workspace.focustube-pinned,
+.html5-video-player #focustube-sidebar-workspace.focustube-pinned,
+.html5-video-player.ytp-fullscreen #focustube-sidebar-workspace.focustube-pinned,
+:fullscreen #focustube-sidebar-workspace.focustube-pinned {
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  max-height: calc(100% - 90px) !important;
+  z-index: 2150 !important;
+}
+
+.focustube-expand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.focustube-expand-text {
+  letter-spacing: 0.02em;
+}
+
+/* Hide Shorts Shelves on Desktop & Mobile */
+body.focustube-active.focustube-hide-shorts ytd-guide-entry-renderer:has(a[href*="/shorts"]),
+body.focustube-active.focustube-hide-shorts ytd-mini-guide-entry-renderer:has(a[href*="/shorts"]),
+body.focustube-active.focustube-hide-shorts ytm-pivot-bar-item-renderer:has(div[aria-label*="Shorts"]) {
+  display: none !important;
+}
+
+/* Hide comments if enabled */
+body.focustube-active.focustube-hide-comments ytd-comments#comments,
+body.focustube-active.focustube-hide-comments ytm-comments-entry-point-header-renderer {
+  display: none !important;
+}
+
+/* ========================================================
+   Clean Search Target Indicator (Right of Search Bar)
+   Non-intrusive, Native YouTube Theme Integration
+   Preserves search box structure, borders, and controls
+   ======================================================== */
+
+#focustube-search-target-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  margin-left: 10px;
+  border-radius: 18px;
+  background: var(--yt-spec-badge-chip-background, rgba(255, 255, 255, 0.08));
+  border: 1px solid var(--yt-spec-10-percent-layer, rgba(255, 255, 255, 0.12));
+  color: var(--yt-spec-text-primary, #ffffff);
+  font-family: 'Roboto', 'YouTube Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  box-sizing: border-box;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  max-width: 220px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
+
+#focustube-search-target-indicator:hover {
+  background: var(--yt-spec-button-chip-background-hover, rgba(255, 255, 255, 0.14));
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+}
+
+.focustube-target-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  flex-shrink: 0;
+  animation: focustube-pulse-dot 2.5s infinite ease-in-out;
+}
+
+@keyframes focustube-pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.6)); }
+}
+
+.focustube-target-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.focustube-target-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.focustube-target-name {
+  color: var(--yt-spec-text-primary, #ffffff);
+  font-weight: 600;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Light Mode Overrides */
+html:not([dark]) #focustube-search-target-indicator {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #0f172a;
+}
+
+html:not([dark]) #focustube-search-target-indicator:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+html:not([dark]) .focustube-target-name {
+  color: #0f172a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  #focustube-search-target-indicator {
+    max-width: 160px;
+    padding: 0 10px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 650px) {
+  #focustube-search-target-indicator {
+    max-width: 120px;
+    padding: 0 8px;
+    height: 30px;
+  }
+  .focustube-target-label {
+    display: none;
+  }
+}
+
+/* Mobile Subdomain (m.youtube.com) Target Pill */
+#focustube-search-target-indicator.focustube-target-mobile {
+  margin: 4px 8px;
+  height: 28px;
+  padding: 0 8px;
+  font-size: 11px;
+  max-width: 140px;
+}
+
+/* FocusTube Clean Toast Notification */
+#focustube-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 9px 18px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  z-index: 100000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+#focustube-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========================================================
+   Native-Style Focused Home Page Feed
+   Smooth Infinite Scroll - Zero Layout Shift
+   ======================================================== */
+
+#focustube-home-feed {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px 32px;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'YouTube Sans', Arial, sans-serif;
+  color: var(--yt-spec-text-primary, #ffffff);
+  animation: focustube-fade-in 0.2s ease-out;
+}
+
+@keyframes focustube-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Topic Header & Sub-tag chips */
+.focustube-feed-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--yt-spec-10-percent-layer, rgba(255, 255, 255, 0.1));
+}
+
+.focustube-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.focustube-header-title {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--yt-spec-text-primary, #ffffff);
+}
+
+.focustube-header-badge {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.focustube-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.focustube-btn-refresh {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.focustube-btn-refresh:hover {
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+.focustube-watched-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  background: rgba(16, 185, 129, 0.9);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.focustube-card-watched {
+  opacity: 0.85;
+}
+
+.focustube-card-watched:hover {
+  opacity: 1;
+}
+
+.focustube-feed-divider {
+  grid-column: 1 / -1;
+  margin: 20px 0 6px 0;
+  padding-top: 14px;
+  border-top: 1px dashed var(--yt-spec-10-percent-layer, rgba(255, 255, 255, 0.15));
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--yt-spec-text-secondary, #94a3b8);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Topic Filter Chips */
+.focustube-filter-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.focustube-filter-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.focustube-filter-chip {
+  background: var(--yt-spec-badge-chip-background, rgba(255, 255, 255, 0.08));
+  color: var(--yt-spec-text-primary, #ffffff);
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.focustube-filter-chip:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.focustube-filter-chip.active {
+  background: var(--yt-spec-text-primary, #ffffff);
+  color: var(--yt-spec-base-background, #0f0f0f);
+  font-weight: 600;
+}
+
+/* Native Video Grid: 100% stable layout */
+#focustube-native-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 28px 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Video Card */
+.focustube-native-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  contain: content; /* Improves scroll performance */
+}
+
+.focustube-native-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #181818;
+}
+
+.focustube-native-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.focustube-native-card:hover .focustube-native-thumb {
+  transform: scale(1.02);
+}
+
+.focustube-native-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.82);
+  color: #ffffff;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.focustube-native-card-details {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.focustube-native-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ef4444, #3b82f6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.focustube-native-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.focustube-native-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.focustube-native-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--yt-spec-text-primary, #ffffff);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.focustube-native-channel {
+  font-size: 12px;
+  color: var(--yt-spec-text-secondary, #aaaaaa);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.focustube-native-meta-row {
+  font-size: 12px;
+  color: var(--yt-spec-text-secondary, #aaaaaa);
+  margin-top: 2px;
+}
+
+.focustube-native-queue-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s;
+}
+
+.focustube-native-card:hover .focustube-native-queue-btn {
+  opacity: 1;
+}
+
+.focustube-native-queue-btn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Infinite Scroll Loader */
+.focustube-infinite-loader {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 0;
+  color: var(--yt-spec-text-secondary, #aaaaaa);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.focustube-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ef4444;
+  border-radius: 50%;
+  animation: focustube-spin 0.8s linear infinite;
+}
+
+@keyframes focustube-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========================================================
+   Sidebar / Mobile Workspace
+   ======================================================== */
+
+#focustube-sidebar-workspace {
+  background: var(--yt-spec-base-background, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 20px;
+  color: var(--yt-spec-text-primary, #f1f5f9);
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  animation: focustube-fade-in 0.2s ease-out;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.focustube-ws-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.focustube-ws-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.focustube-ws-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.focustube-ws-control-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.focustube-ws-control-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.focustube-ws-control-btn.active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #60a5fa;
+}
+
+.focustube-ws-control-btn.active:hover {
+  background: rgba(59, 130, 246, 0.35);
+  color: #93c5fd;
+}
+
+.focustube-control-icon {
+  flex-shrink: 0;
+}
+
+.focustube-control-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.focustube-pinned-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(59, 130, 246, 0.14);
+  border: 1px solid rgba(59, 130, 246, 0.32);
+  color: #93c5fd;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  animation: focustube-fade-in 0.2s ease-out;
+}
+
+.focustube-ws-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.focustube-brand-badge {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.focustube-ws-topic-tag {
+  font-size: 11px;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.focustube-tabs-nav {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px;
+  border-radius: 8px;
+  gap: 2px;
+  overflow-x: auto;
+}
+
+.focustube-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 6px 3px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.focustube-tab-btn:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.focustube-tab-btn.active {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.focustube-tab-panel {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.focustube-tab-panel.active {
+  display: flex;
+}
+
+.focustube-notes-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.focustube-ts-sync-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.focustube-btn-grab-timestamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  border-radius: 18px;
+  padding: 5px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.focustube-btn-grab-timestamp:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.focustube-btn-grab-timestamp.captured {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #34d399;
+}
+
+.focustube-btn-grab-timestamp.captured:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+}
+
+.focustube-btn-capture-frame {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+  border-radius: 18px;
+  padding: 5px 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.focustube-btn-capture-frame:hover {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #93c5fd;
+  transform: translateY(-1px);
+}
+
+.focustube-btn-capture-frame:active {
+  transform: translateY(0);
+}
+
+.focustube-btn-capture-inline-frame {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.focustube-btn-capture-inline-frame:hover {
+  background: rgba(59, 130, 246, 0.22);
+  color: #93c5fd;
+}
+
+.focustube-live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.focustube-live-pulse-dot.playing {
+  animation: focustube-live-pulse 1.4s infinite ease-in-out;
+}
+
+.focustube-btn-grab-timestamp.captured .focustube-live-pulse-dot {
+  background: #10b981;
+  animation: none;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+}
+
+@keyframes focustube-live-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0);
+  }
+}
+
+.focustube-live-time-val {
+  font-family: 'Roboto Mono', monospace, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.focustube-btn-reset-ts {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.focustube-btn-reset-ts:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.focustube-ts-hint {
+  font-size: 10.5px;
+  color: #64748b;
+  font-style: italic;
+  padding-left: 4px;
+}
+
+/* Rich Text Formatting Toolbar */
+.focustube-rich-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 4px 6px;
+  flex-wrap: wrap;
+  user-select: none;
+}
+
+.focustube-toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.focustube-toolbar-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 4px;
+}
+
+.focustube-toolbar-select {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--yt-spec-text-primary, #e2e8f0);
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  height: 24px;
+}
+
+.focustube-toolbar-select option {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+.focustube-tool-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11.5px;
+  transition: all 0.12s ease;
+  padding: 0;
+}
+
+.focustube-tool-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.focustube-tool-btn:active,
+.focustube-tool-btn.active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #60a5fa;
+}
+
+/* Rich Text Editor Content Area */
+.focustube-rich-editor {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0 0 8px 8px;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #f1f5f9;
+  min-height: 72px;
+  max-height: 250px;
+  overflow-y: auto;
+  outline: none;
+  font-family: 'Roboto', 'YouTube Sans', Arial, sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: text;
+}
+
+.focustube-rich-editor:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.focustube-rich-editor:empty:before {
+  content: attr(placeholder);
+  color: #64748b;
+  pointer-events: none;
+  display: block;
+}
+
+/* Rich Content Formatted Elements */
+.focustube-rich-editor h1,
+.focustube-note-text h1 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 4px 0 2px;
+  color: #ffffff;
+}
+
+.focustube-rich-editor h2,
+.focustube-note-text h2 {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin: 3px 0 2px;
+  color: #f8fafc;
+}
+
+.focustube-rich-editor h3,
+.focustube-note-text h3 {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin: 2px 0 2px;
+  color: #f1f5f9;
+}
+
+.focustube-rich-editor p,
+.focustube-note-text p,
+.focustube-rich-editor div,
+.focustube-note-text div {
+  margin: 2px 0;
+}
+
+.focustube-rich-editor ul,
+.focustube-note-text ul {
+  list-style-type: disc;
+  margin: 3px 0 3px 18px;
+  padding: 0;
+}
+
+.focustube-rich-editor ol,
+.focustube-note-text ol {
+  list-style-type: decimal;
+  margin: 3px 0 3px 18px;
+  padding: 0;
+}
+
+.focustube-rich-editor li,
+.focustube-note-text li {
+  margin: 2px 0;
+}
+
+.focustube-rich-editor mark,
+.focustube-note-text mark {
+  background: rgba(234, 179, 8, 0.35);
+  color: #fef08a;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.focustube-rich-editor code,
+.focustube-note-text code,
+.focustube-code-snippet {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #38bdf8;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  font-size: 11.5px;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Blockquotes */
+.focustube-rich-editor blockquote,
+.focustube-note-text blockquote {
+  border-left: 3px solid #3b82f6;
+  padding: 4px 10px;
+  margin: 4px 0;
+  color: #cbd5e1;
+  font-style: italic;
+  background: rgba(59, 130, 246, 0.06);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Multi-line Preformatted Code Blocks */
+.focustube-rich-editor pre,
+.focustube-note-text pre {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: 'Roboto Mono', 'Courier New', monospace;
+  font-size: 11.5px;
+  color: #38bdf8;
+  overflow-x: auto;
+  margin: 6px 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.focustube-rich-editor pre code,
+.focustube-note-text pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Links */
+.focustube-rich-editor a,
+.focustube-note-text a {
+  color: #38bdf8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Task Lists & Checkboxes */
+.focustube-rich-editor ul.focustube-task-list,
+.focustube-note-text ul.focustube-task-list {
+  list-style-type: none !important;
+  margin: 4px 0 4px 2px !important;
+  padding: 0 !important;
+}
+
+.focustube-rich-editor li.focustube-task-item,
+.focustube-note-text li.focustube-task-item {
+  list-style: none !important;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 3px 0;
+}
+
+.focustube-task-checkbox {
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.focustube-task-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.focustube-task-item.checked .focustube-task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* Screenshot Figures & Captions */
+.focustube-rich-editor figure.focustube-screenshot-figure,
+.focustube-note-text figure.focustube-screenshot-figure {
+  margin: 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.focustube-rich-editor figure.focustube-screenshot-figure:hover,
+.focustube-note-text figure.focustube-screenshot-figure:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.focustube-screenshot-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.focustube-screenshot-caption {
+  padding: 5px 8px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #94a3b8;
+  font-style: italic;
+  background: rgba(15, 23, 42, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  outline: none;
+  cursor: text;
+}
+
+.focustube-screenshot-caption:focus {
+  background: rgba(15, 23, 42, 0.95);
+  color: #e2e8f0;
+}
+
+.focustube-inline-toolbar {
+  border-radius: 6px 6px 0 0;
+  padding: 3px 5px;
+}
+
+.focustube-inline-rich-editor {
+  min-height: 54px;
+  border-radius: 0 0 6px 6px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.focustube-notes-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.focustube-btn-primary {
+  background: #ef4444;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.focustube-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.focustube-btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.focustube-btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Export Dropdown Menu */
+.focustube-export-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.focustube-export-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.focustube-export-menu-dropdown {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.15);
+  padding: 6px;
+  min-width: 210px;
+  z-index: 10000;
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  backdrop-filter: blur(8px);
+}
+
+.focustube-export-menu-dropdown.show {
+  display: flex;
+}
+
+.focustube-export-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: transparent;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.focustube-export-menu-item:hover {
+  background: rgba(239, 68, 68, 0.18);
+  color: #ffffff;
+}
+
+.focustube-export-menu-item svg {
+  flex-shrink: 0;
+  color: #94a3b8;
+  transition: color 0.12s ease;
+}
+
+.focustube-export-menu-item:hover svg {
+  color: #ef4444;
+}
+
+.focustube-export-menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 3px 0;
+}
+
+/* Spinner for Export Loading */
+.focustube-export-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: focustube-spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+@keyframes focustube-spin {
+  to { transform: rotate(360deg); }
+}
+
+.focustube-notes-list, .focustube-queue-list, .focustube-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.focustube-note-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.focustube-note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.focustube-timestamp-pill {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.focustube-note-actions-btns {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.focustube-note-export-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 5px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.focustube-note-export-btn:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.focustube-note-export-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.focustube-note-export-btn svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+.focustube-note-edit-btn,
+.focustube-note-del-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.focustube-note-edit-btn:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.focustube-note-del-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.focustube-note-body {
+  margin-top: 3px;
+}
+
+.focustube-note-text {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #e2e8f0;
+  word-break: break-word;
+  white-space: pre-wrap;
+  cursor: text;
+  border-radius: 4px;
+  padding: 2px 0;
+  transition: background 0.15s ease;
+}
+
+.focustube-note-edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.focustube-note-edit-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  color: #f8fafc;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  resize: vertical;
+  min-height: 52px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.focustube-note-edit-textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.focustube-note-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.focustube-btn-update-time {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #94a3b8;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.focustube-btn-update-time:hover,
+.focustube-btn-update-time.active {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.focustube-btn-save-note {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.focustube-btn-save-note:hover {
+  background: #1d4ed8;
+}
+
+.focustube-btn-cancel-note {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.focustube-btn-cancel-note:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.focustube-queue-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.focustube-queue-item.active-video {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.focustube-queue-thumb {
+  width: 64px;
+  height: 38px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: #1e293b;
+  flex-shrink: 0;
+}
+
+.focustube-queue-title {
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #f1f5f9;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.focustube-queue-channel {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.focustube-timer-box {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.focustube-timer-display {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+}
+
+.focustube-timer-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.focustube-tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.focustube-tag-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+/* ========================================================
+   Mobile Responsiveness
+   ======================================================== */
+
+@media (max-width: 768px) {
+  #focustube-home-feed {
+    padding: 12px 10px;
+  }
+
+  #focustube-native-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .focustube-header-title {
+    font-size: 16px;
+  }
+
+  #focustube-sidebar-workspace {
+    margin: 10px 0;
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  #focustube-sidebar-workspace.focustube-pinned {
+    width: calc(100vw - 20px) !important;
+    right: 10px !important;
+    top: 56px !important;
+    max-height: calc(100vh - 100px) !important;
+  }
+
+  #focustube-expand-toggle-btn {
+    top: 60px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 11.5px;
+  }
+
+  .focustube-endscreen-card {
+    max-width: 90%;
+    padding: 12px;
+  }
+}

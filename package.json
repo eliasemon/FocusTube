@@ -1,0 +1,22 @@
+{
+  "name": "focused-topic",
+  "version": "1.0.0",
+  "description": "A Chrome extension built with Manifest V3 designed to turn YouTube into a distraction-free learning environment. Choose a topic, analyze and discover tags, block algorithmic feeds, and replace YouTube's right-hand recommendation column with an interactive **Focus Workspace** for timestamped notes, topic queues, and focus timers.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "docx": "^9.15.0"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

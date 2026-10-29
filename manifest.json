@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "FocusTube - Topic Deep-Dive & Distraction Blocker",
+  "version": "1.1.0",
+  "description": "Study with laser focus on YouTube. Filter videos by topic, eliminate recommendation rabbit holes, and take timestamped notes on desktop and mobile.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "FocusTube - Topic Settings & Queue",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.youtube.com/*",
+    "https://youtube.com/*",
+    "https://suggestqueries.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://youtube.com/*"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "js": [
+        "content/lib/docx.iife.js",
+        "content/export-service.js",
+        "content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

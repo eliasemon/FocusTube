@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusTube</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <div class="logo-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" stroke="#ef4444" stroke-width="2"/>
+            <polygon points="10,8 16,12 10,16" fill="#ef4444"/>
+          </svg>
+        </div>
+        <div>
+          <h1>FocusTube</h1>
+          <span class="tagline">Topic Learning & Distraction Blocker</span>
+        </div>
+      </div>
+      <div class="focus-switch-wrapper">
+        <label class="toggle-switch">
+          <input type="checkbox" id="master-focus-toggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="popup-nav">
+      <button class="nav-btn active" data-tab="tab-topic">🎯 Topics</button>
+      <button class="nav-btn" data-tab="tab-queue">📚 Queue</button>
+      <button class="nav-btn" data-tab="tab-notes">📝 Notes</button>
+      <button class="nav-btn" data-tab="tab-settings">⚙️ Settings</button>
+    </nav>
+
+    <!-- TAB 1: Topic Management & Tag Analyzer -->
+    <section class="tab-pane active" id="tab-topic">
+      <div class="card">
+        <div class="card-header-flex">
+          <label class="card-label">Active Learning Topic</label>
+          <span id="indexed-count-badge" class="badge" title="Regex-indexed videos for this topic">0 Indexed</span>
+        </div>
+        <div class="topic-select-row">
+          <select id="topic-select" class="select-input"></select>
+          <button id="btn-show-new-topic" class="btn-icon" title="Create New Topic">+</button>
+        </div>
+        <button id="btn-reindex-topic" class="btn-secondary full-width" style="font-size: 11px; padding: 5px;">
+          ⚡ Re-Index Topic Videos with Regex
+        </button>
+      </div>
+
+      <!-- New Topic Creation Box (Collapsible) -->
+      <div id="new-topic-box" class="card new-topic-panel hidden">
+        <div class="panel-header">
+          <h3>Create New Topic</h3>
+          <button id="btn-cancel-topic" class="btn-close">×</button>
+        </div>
+        <div class="form-group">
+          <label for="new-topic-name">Topic Name</label>
+          <input type="text" id="new-topic-name" placeholder="e.g. Next.js 15, Machine Learning, Python">
+        </div>
+        <div class="form-group">
+          <label>Topic Tag Analyzer (Real-time YouTube suggestions)</label>
+          <div class="tag-input-row">
+            <input type="text" id="tag-search-input" placeholder="Search tag or subtopic...">
+            <button id="btn-search-tags" class="btn-sm">Analyze</button>
+          </div>
+          <div id="tag-suggestions-box" class="suggestions-cloud"></div>
+        </div>
+        <div class="form-group">
+          <label>Selected Tags</label>
+          <div id="selected-tags-box" class="tags-pill-box"></div>
+        </div>
+        <button id="btn-save-topic" class="btn-primary full-width">Save & Activate Topic</button>
+      </div>
+
+      <!-- Quick Actions for Active Topic -->
+      <div class="card">
+        <label class="card-label">Active Topic Tags & YouTube Search</label>
+        <div id="active-tags-cloud" class="tags-pill-box" style="margin-bottom: 12px;"></div>
+        <div class="btn-group-row">
+          <button id="btn-search-topic-youtube" class="btn-primary">
+            🔍 Search on YouTube
+          </button>
+          <button id="btn-queue-current-tab" class="btn-secondary">
+            + Queue Current Tab
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: Video Queue -->
+    <section class="tab-pane" id="tab-queue">
+      <div class="card queue-container">
+        <div class="card-header-flex">
+          <label class="card-label">Curated Videos for Current Topic</label>
+          <span id="queue-count-badge" class="badge">0</span>
+        </div>
+        <div id="popup-queue-list" class="video-list"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Saved Notes -->
+    <section class="tab-pane" id="tab-notes">
+      <div class="card">
+        <div class="card-header-flex">
+          <label class="card-label">Timestamped Video Notes</label>
+          <div class="popup-export-group" style="display: flex; gap: 4px;">
+            <button id="btn-export-notes-docx" class="btn-sm" title="Export notes as Word (.docx)">Word (.docx)</button>
+            <button id="btn-export-all-notes" class="btn-sm" title="Export notes as Markdown (.md)">Markdown (.md)</button>
+          </div>
+        </div>
+        <div id="popup-notes-list" class="notes-tree"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: Settings & Distraction Controls -->
+    <section class="tab-pane" id="tab-settings">
+      <div class="card">
+        <label class="card-label">YouTube Distraction Blockers</label>
+        <div class="checkbox-row">
+          <label class="checkbox-container">
+            <input type="checkbox" id="check-block-home">
+            <span class="checkmark"></span>
+            Block YouTube Home Feed Recommendations
+          </label>
+        </div>
+        <div class="checkbox-row">
+          <label class="checkbox-container">
+            <input type="checkbox" id="check-block-sidebar">
+            <span class="checkmark"></span>
+            Replace Right-Side Video Suggestions with Focus Workspace
+          </label>
+        </div>
+        <div class="checkbox-row">
+          <label class="checkbox-container">
+            <input type="checkbox" id="check-block-shorts">
+            <span class="checkmark"></span>
+            Block YouTube Shorts (Shelves & Nav Items)
+          </label>
+        </div>
+        <div class="checkbox-row">
+          <label class="checkbox-container">
+            <input type="checkbox" id="check-block-comments">
+            <span class="checkmark"></span>
+            Block Video Comments Section
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="card-label">YouTube Data API v3 (Optional)</label>
+        <p class="card-hint">
+          Add an API key to enable rich in-popup video search cards with thumbnails. Real-time tag analysis works even without an API key!
+        </p>
+        <div class="api-key-row">
+          <input type="password" id="api-key-input" placeholder="AIzaSy...">
+          <button id="btn-save-api-key" class="btn-sm">Save</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="card-label">Focus Timer Duration</label>
+        <div class="form-row-inline">
+          <input type="number" id="timer-duration-input" min="5" max="120" value="25" style="width: 70px;">
+          <span>minutes per study session</span>
+          <button id="btn-save-timer" class="btn-sm">Update</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Bar -->
+    <footer class="popup-footer">
+      <span id="status-pill" class="status-pill">Ready</span>
+      <span class="version-label">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script src="../content/lib/docx.iife.js"></script>
+  <script src="../content/export-service.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
